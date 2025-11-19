@@ -1,0 +1,64 @@
+/* styles.css */
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top, #0b0b0b, #1a1a1a);
+  color: #fff;
+  font-family: "Arial", sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 6em;
+  margin-top: 1em;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+}
+
+p {
+  font-size: 1.2em;
+  margin: 0.5em 0;
+}
+
+#starCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.mars-element {
+  position: absolute;
+  bottom: 35%;
+  right: 5%;
+  width: 120px;
+  height: 120px;
+  z-index: 1;
+}
+
+.game-ui {
+  position: absolute;
+  bottom: 25%;
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+  font-size: 1.2em;
+}
+
+.game-ui span {
+  color: #ffea00;
+  font-weight: bold;
+}

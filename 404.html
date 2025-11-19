@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 • Lost on Mars</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>404</h1>
+      <p>You’re lost in space... again.</p>
+      <canvas id="starCanvas"></canvas>
+
+      <div class="mars-element">
+        <!-- Inline SVG for Mars -->
+        <svg width="120" height="120" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="50" fill="url(#marsGradient)" />
+          <defs>
+            <radialGradient id="marsGradient" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ff6f61" />
+              <stop offset="100%" stop-color="#b22222" />
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="game-ui">
+        <p>Catch the stars!</p>
+        <p>Score: <span id="score">0</span></p>
+        <p>Stars Caught: <span id="starsCaught">0</span></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
