@@ -1,5 +1,3 @@
-/* styles.css - updated layout: planet top half badge + spaceship CTA + fewer asteroids */
-
 :root{
   --bg-1: #07060a;
   --bg-2: #0e0b11;
@@ -11,11 +9,10 @@
   --badge-bg: rgba(0,0,0,0.28);
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin:0; padding:0; user-select:none; }
 
 html, body {
   height: 100%;
-  margin: 0;
   font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
   background: radial-gradient(1200px 600px at 15% 10%, #0b0710 0%, var(--bg-2) 40%, var(--bg-1) 100%);
   color: #fff;
@@ -47,29 +44,29 @@ html, body {
   justify-content: center;
   align-items: flex-end;
   gap: 18px;
-  padding-bottom: 0;
-  pointer-events: none; /* keep clicks to planet-wrap only */
+  pointer-events: none;
 }
 
 /* planet wrapper shows top half only */
 .planet-wrap {
-  pointer-events: auto; /* clickable area */
+  pointer-events: auto;
   width: clamp(220px, 30vw, 520px);
   height: calc(clamp(220px, 30vw, 520px) / 2);
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  cursor: pointer;
 }
 
 .planet {
   width: 100%;
-  transform: translateY(-50%); /* move planet up so top half visible */
+  transform: translateY(-25%);
   filter: drop-shadow(0 20px 30px var(--mars-shadow));
   position: relative;
 }
 
-/* readable badge sitting on the visible top half of the planet */
+/* readable badge sitting on top half */
 .planet-badge {
   position: absolute;
   left: 50%;
@@ -85,6 +82,8 @@ html, body {
   backdrop-filter: blur(4px);
   pointer-events: none;
   width: min(86%, 420px);
+  z-index: 10;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .badge-404 {
@@ -103,15 +102,19 @@ html, body {
   max-width: 42ch;
 }
 
-/* spaceship CTA (small) */
+/* spaceship CTA */
 .spaceship-cta {
+  position: absolute;
+  bottom: calc(clamp(220px, 30vw, 520px)/2 + 12px);
+  left: 50%;
+  transform: translateX(100%);
   width: clamp(140px, 22vw, 260px);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  pointer-events: none; /* decorative only */
-  margin-bottom: calc(clamp(220px, 30vw, 520px) / 4);
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .ship-icon { display: block; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
@@ -126,11 +129,10 @@ html, body {
   border-radius: 8px;
 }
 
-/* game UI is placed above the planet area, not overlaying it */
+/* game UI */
 .game-ui {
   position: absolute;
   left: 50%;
-  bottom: calc( (clamp(220px, 30vw, 520px) / 2) + 10vh );
   transform: translateX(-50%);
   z-index: 7;
   text-align: center;
