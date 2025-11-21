@@ -10,7 +10,7 @@
    CONFIG / AUDIO
    =========================== */
 
-   const AUDIO_URL = '/mnt/data/deep-bass-horror-braam-trailer-228762.mp3'; // uploaded file path
+   const AUDIO_URL = './explotion.mp3';
    const AUDIO_POOL_SIZE = 6; // how many simultaneous explosion sounds
    const EXPLOSION_VOLUME = 0.08; // low volume so it's not jarring
    
