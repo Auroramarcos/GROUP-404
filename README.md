@@ -1,61 +1,39 @@
-Overview
-_________________________________________
-Lost on Mars is an interactive and animated 404 error page that replaces a standard error message with a space-themed mini-game. Users can catch falling stars to increase their score, while a custom Mars graphic and animated starfield create an immersive visual experience. The project demonstrates front-end development, animation using the Canvas API, and responsive web design.
+# Save Mars — 404 Interactive Experience
 
-Group Members
-_________________________________________
-Member 1	Sofía Castro
+**Open the 404:** open `index.html` in this repository to load the interactive 404 page.
 
-Member 2	Laura Altozano
+---
 
-Member 3	Lucía
+## Overview
+This 404 is a short interactive mission: red, asteroid-like rocks fall toward Mars. Your job is cinematic and simple — **tap or click asteroids to explode them** and protect Mars (and Earth).
 
-Member 4 Mariana
+Explosions include:
+- chunky shard fragments,
+- expanding smoke puffs,
+- small spark particles,
+- and a low-volume impact sound to make hits feel satisfying.
 
-Member 5 Lucía Antón
+The scene includes tiny shooting stars in the background for ambience and scales to different screen sizes.
 
-Member 6 Aurora
+---
 
-Features
-_________________________________________
-Animated starfield using HTML5 Canvas
+## Developers
+- Laura Altozano  
+- Mariana González  
+- Lucía Antón  
+- Lucia Bilantuono  
+- Aurora Marcos  
+- Sofía Castro
 
-Click-based star-catching mini-game with score tracking
+---
 
-Custom SVG Mars graphic
+## Features
+- Asteroid-like falling objects with crater details
+- Click/tap to explode: shards + smoke + sparks
+- Small shooting stars in the background
+- Explosion sound effects (uses an uploaded file)
+- Responsive canvas rendering with devicePixelRatio scaling
+- Touch support and keyboard accessibility (Spacebar to clear nearest)
+- Restart and best-score persistence (localStorage)
 
-Responsive full-screen layout
-
-Smooth animations using requestAnimationFrame
-
-Technologies Used
-_________________________________________
-HTML5 for structure
-
-CSS3 for layout, theming, and visual effects
-
-JavaScript (ES6) for animation and interactivity
-
-SVG for scalable graphics
-
-How to Run
-_________________________________________
-Clone the repository:
-
-git clone https://github.com/your-username/lost-on-mars.git
-
-
-Open index.html in any modern web browser.
-No server or dependencies required.
-
-Testing & Evaluation
-_________________________________________
-Tested on Chrome, Firefox, Edge, and Safari
-
-Verified responsive behavior on various screen sizes
-
-Confirmed smooth star animation performance
-
-Validated click detection and score accuracy
-
-Ensured SVG and canvas elements layer correctly
+---
