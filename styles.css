@@ -1,4 +1,4 @@
-/* styles.css - Mars 404 with centered bottom planet and responsive layout */
+/* styles.css - updated layout: planet top half badge + spaceship CTA + fewer asteroids */
 
 :root{
   --bg-1: #07060a;
@@ -8,6 +8,7 @@
   --ui-glow: 0 0 14px rgba(255,100,80,0.12);
   --btn-bg: rgba(255,255,255,0.03);
   --btn-border: rgba(255,255,255,0.06);
+  --badge-bg: rgba(0,0,0,0.28);
 }
 
 * { box-sizing: border-box; }
@@ -23,7 +24,7 @@ html, body {
 
 .container { position: relative; width: 100%; height: 100%; }
 
-/* canvas behind everything */
+/* canvas */
 #spaceCanvas {
   position: absolute;
   inset: 0;
@@ -33,74 +34,105 @@ html, body {
   display: block;
 }
 
-/* planet at bottom center: only top half visible */
-.planet-wrap{
+/* planet row (centered bottom) */
+.planet-row {
   position: absolute;
   left: 50%;
-  bottom: -40px; /* push half of the planet below the viewport edge */
+  bottom: 0;
   transform: translateX(-50%);
-  z-index: 5;
-  width: clamp(220px, 28vw, 420px);
-  height: calc(clamp(220px, 28vw, 420px) / 2); /* show roughly half */
+  width: 100%;
+  max-width: 860px;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 18px;
+  padding-bottom: 0;
+  pointer-events: none; /* keep clicks to planet-wrap only */
+}
+
+/* planet wrapper shows top half only */
+.planet-wrap {
+  pointer-events: auto; /* clickable area */
+  width: clamp(220px, 30vw, 520px);
+  height: calc(clamp(220px, 30vw, 520px) / 2);
   overflow: hidden;
-  pointer-events: auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  cursor: pointer;
 }
 
 .planet {
   width: 100%;
-  height: auto;
-  transform: translateY(-50%); /* move whole planet up so only top half visible */
+  transform: translateY(-50%); /* move planet up so top half visible */
   filter: drop-shadow(0 20px 30px var(--mars-shadow));
+  position: relative;
 }
 
-.planet-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-  user-select: none;
-  -webkit-user-select: none;
-  pointer-events: none; /* pointer events handled by planet-wrap */
-}
-
-/* hero 404 sits visually above the planet, centered lower end */
-.hero {
+/* readable badge sitting on the visible top half of the planet */
+.planet-badge {
   position: absolute;
   left: 50%;
-  bottom: calc( (clamp(220px, 28vw, 420px) / 2) + 8px ); /* place above planet top */
+  top: 12%;
   transform: translateX(-50%);
-  text-align: center;
-  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.22));
+  backdrop-filter: blur(4px);
   pointer-events: none;
+  width: min(86%, 420px);
 }
 
-#big404 {
-  margin: 0;
-  font-size: clamp(48px, 10vw, 120px);
-  letter-spacing: 6px;
+.badge-404 {
+  font-size: clamp(38px, 8vw, 88px);
   color: #ffb6a3;
-  text-shadow: 0 6px 18px rgba(139,27,22,0.45), 0 0 8px rgba(255,110,90,0.08);
+  font-weight: 800;
+  letter-spacing: 6px;
   line-height: 0.9;
+  text-shadow: 0 6px 14px rgba(139,27,22,0.35);
 }
 
-.tagline {
-  margin: 6px 0 0;
-  font-size: clamp(12px, 2.1vw, 16px);
+.badge-tag {
+  font-size: clamp(12px, 1.9vw, 16px);
   color: #ffd9c9;
+  text-align: center;
   max-width: 42ch;
-  opacity: 0.95;
 }
 
-/* Game UI */
+/* spaceship CTA (small) */
+.spaceship-cta {
+  width: clamp(140px, 22vw, 260px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none; /* decorative only */
+  margin-bottom: calc(clamp(220px, 30vw, 520px) / 4);
+}
+
+.ship-icon { display: block; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
+.ship-label {
+  font-size: 12px;
+  color: #ffd9c9;
+  text-align: center;
+  max-width: 16rem;
+  opacity: 0.95;
+  background: rgba(0,0,0,0.18);
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+
+/* game UI is placed above the planet area, not overlaying it */
 .game-ui {
   position: absolute;
-  bottom: calc( (clamp(220px, 28vw, 420px) / 2) + 12px + 6vh);
   left: 50%;
+  bottom: calc( (clamp(220px, 30vw, 520px) / 2) + 10vh );
   transform: translateX(-50%);
-  z-index: 6;
+  z-index: 7;
   text-align: center;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
   padding: 10px 16px;
@@ -112,18 +144,15 @@ html, body {
 }
 
 .instructions { margin: 0 0 6px 0; font-size: 13px; opacity: 0.95; }
-
 .scoreboard { display: flex; gap: 12px; justify-content: center; font-weight: 600; font-size: 15px; flex-wrap: wrap; }
 .scoreboard span { color: var(--accent); }
-
 .controls { display: flex; gap: 10px; justify-content: center; margin-top: 8px; }
 .btn { background: var(--btn-bg); border: 1px solid var(--btn-border); color: #fff; padding: 8px 12px; border-radius: 10px; font-weight: 600; cursor: pointer; min-width: 84px; }
 
-.credits { position: absolute; left: 6%; bottom: 2%; z-index: 6; font-size: 12px; color: #d9cfcf; opacity: 0.9; }
+.credits { position: absolute; left: 6%; bottom: 2%; z-index: 7; font-size: 12px; color: #d9cfcf; opacity: 0.9; }
 
-/* small screens adjust spacing */
+/* responsive fallback */
 @media (max-height: 520px) {
-  .hero { bottom: 90px; } /* fallback */
-  .game-ui { bottom: 22vh; }
-  .planet-wrap { bottom: -30px; }
+  .planet-wrap { height: 160px; }
+  .game-ui { bottom: 26vh; }
 }
