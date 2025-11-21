@@ -1,4 +1,4 @@
-/* styles.css - Mars 404 vibe + controls */
+/* styles.css - Mars 404 with centered bottom planet and responsive layout */
 
 :root{
   --bg-1: #07060a;
@@ -18,23 +18,66 @@ html, body {
   font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
   background: radial-gradient(1200px 600px at 15% 10%, #0b0710 0%, var(--bg-2) 40%, var(--bg-1) 100%);
   color: #fff;
-  -webkit-font-smoothing: antialiased;
   overflow: hidden;
 }
 
 .container { position: relative; width: 100%; height: 100%; }
 
-/* header */
+/* canvas behind everything */
+#spaceCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: block;
+}
+
+/* planet at bottom center: only top half visible */
+.planet-wrap{
+  position: absolute;
+  left: 50%;
+  bottom: -40px; /* push half of the planet below the viewport edge */
+  transform: translateX(-50%);
+  z-index: 5;
+  width: clamp(220px, 28vw, 420px);
+  height: calc(clamp(220px, 28vw, 420px) / 2); /* show roughly half */
+  overflow: hidden;
+  pointer-events: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.planet {
+  width: 100%;
+  height: auto;
+  transform: translateY(-50%); /* move whole planet up so only top half visible */
+  filter: drop-shadow(0 20px 30px var(--mars-shadow));
+}
+
+.planet-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none; /* pointer events handled by planet-wrap */
+}
+
+/* hero 404 sits visually above the planet, centered lower end */
 .hero {
   position: absolute;
-  top: 6%;
-  left: 5%;
-  z-index: 4;
-  text-align: left;
+  left: 50%;
+  bottom: calc( (clamp(220px, 28vw, 420px) / 2) + 8px ); /* place above planet top */
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 6;
   pointer-events: none;
 }
 
-h1 {
+#big404 {
   margin: 0;
   font-size: clamp(48px, 10vw, 120px);
   letter-spacing: 6px;
@@ -44,45 +87,23 @@ h1 {
 }
 
 .tagline {
-  margin: 8px 0 0 0;
-  font-size: clamp(14px, 2.3vw, 20px);
+  margin: 6px 0 0;
+  font-size: clamp(12px, 2.1vw, 16px);
   color: #ffd9c9;
   max-width: 42ch;
   opacity: 0.95;
 }
 
-/* canvas (space) */
-#spaceCanvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: 1;
-}
-
-/* Mars graphic */
-.mars-element {
-  position: absolute;
-  right: 4%;
-  bottom: 16%;
-  width: clamp(80px, 9vw, 160px);
-  height: auto;
-  z-index: 3;
-  filter: drop-shadow(0 20px 30px var(--mars-shadow));
-  pointer-events: none;
-}
-
 /* Game UI */
 .game-ui {
   position: absolute;
-  bottom: 8%;
+  bottom: calc( (clamp(220px, 28vw, 420px) / 2) + 12px + 6vh);
   left: 50%;
   transform: translateX(-50%);
-  z-index: 4;
+  z-index: 6;
   text-align: center;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
-  padding: 10px 18px;
+  padding: 10px 16px;
   border-radius: 12px;
   backdrop-filter: blur(6px);
   box-shadow: var(--ui-glow);
@@ -90,55 +111,19 @@ h1 {
   max-width: 92%;
 }
 
-.instructions {
-  margin: 0 0 6px 0;
-  font-size: 13px;
-  opacity: 0.95;
-}
+.instructions { margin: 0 0 6px 0; font-size: 13px; opacity: 0.95; }
 
-.scoreboard {
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 16px;
-  flex-wrap: wrap;
-}
-
+.scoreboard { display: flex; gap: 12px; justify-content: center; font-weight: 600; font-size: 15px; flex-wrap: wrap; }
 .scoreboard span { color: var(--accent); }
 
-.controls {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 8px;
-}
+.controls { display: flex; gap: 10px; justify-content: center; margin-top: 8px; }
+.btn { background: var(--btn-bg); border: 1px solid var(--btn-border); color: #fff; padding: 8px 12px; border-radius: 10px; font-weight: 600; cursor: pointer; min-width: 84px; }
 
-.btn {
-  background: var(--btn-bg);
-  border: 1px solid var(--btn-border);
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  min-width: 86px;
-}
+.credits { position: absolute; left: 6%; bottom: 2%; z-index: 6; font-size: 12px; color: #d9cfcf; opacity: 0.9; }
 
-.btn:active { transform: translateY(1px); }
-
-.credits {
-  position: absolute;
-  left: 6%;
-  bottom: 4%;
-  z-index: 4;
-  font-size: 12px;
-  color: #d9cfcf;
-  opacity: 0.9;
-}
-
+/* small screens adjust spacing */
 @media (max-height: 520px) {
-  .hero { top: 3%; }
-  .mars-element { bottom: 22%; right: 3%; }
-  .game-ui { bottom: 4%; padding: 8px 12px; }
+  .hero { bottom: 90px; } /* fallback */
+  .game-ui { bottom: 22vh; }
+  .planet-wrap { bottom: -30px; }
 }
