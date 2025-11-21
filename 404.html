@@ -8,13 +8,14 @@
 </head>
 <body>
   <div class="container">
+    <!-- Fullscreen game canvas -->
     <canvas id="spaceCanvas" aria-label="Interactive Mars 404 game"></canvas>
 
-    <!-- planet centered bottom (only top half visible) -->
+    <!-- Planet boost at bottom -->
     <div class="planet-row">
       <div class="planet-wrap" id="planetWrap" role="button" aria-label="Mars planet - click to boost">
         <div class="planet" id="planet">
-          <!-- planet SVG -->
+          <!-- Planet SVG -->
           <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" class="planet-svg" aria-hidden="true">
             <defs>
               <radialGradient id="marsGradient" cx="50%" cy="40%" r="60%">
@@ -30,16 +31,10 @@
               <ellipse cx="46" cy="68" rx="10" ry="6" />
             </g>
           </svg>
-
-          <!-- readable badge on planet top (404 + tagline) -->
-          <div class="planet-badge" aria-hidden="false">
-            <div class="badge-404">404</div>
-            <div class="badge-tag">Save Mars — save Earth. Astronaut, this mission is yours.</div>
-          </div>
         </div>
       </div>
 
-      <!-- small spaceship + label to the right of planet -->
+      <!-- Spaceship CTA -->
       <div class="spaceship-cta" aria-hidden="true">
         <svg class="ship-icon" viewBox="0 0 24 24" width="42" height="42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path fill="#ffd9c9" d="M2 21s4-4 6-4 6 4 6 4-8-1-12 0z" opacity="0.15"/>
@@ -50,13 +45,11 @@
       </div>
     </div>
 
-    <!-- game UI above planet so it doesn't overlap planet badge -->
+    <!-- Game UI above planet -->
     <div class="game-ui" role="region" aria-label="Game controls and score">
-      <p class="instructions">Tap/click asteroids to explode them. Missed asteroids penalize score.</p>
       <div class="scoreboard">
         <div>Score: <span id="score">0</span></div>
         <div>Best: <span id="best">0</span></div>
-        <div>Cleared: <span id="cleared">0</span></div>
         <div>Misses: <span id="misses">0</span></div>
       </div>
       <div class="controls">
@@ -64,6 +57,9 @@
         <button id="muteBtn" class="btn">🔊</button>
       </div>
     </div>
+
+    <!-- 404 badge in top-left -->
+    <div class="badge-404" id="badge404">404</div>
 
     <footer class="credits">
       <small>Developed by Laura Altozano · Mariana González · Lucía Antón · Lucia Bilantuono · Aurora Marcos · Sofía Castro</small>

@@ -6,13 +6,13 @@
   --ui-glow: 0 0 14px rgba(255,100,80,0.12);
   --btn-bg: rgba(255,255,255,0.03);
   --btn-border: rgba(255,255,255,0.06);
-  --badge-bg: rgba(0,0,0,0.28);
 }
 
-* { box-sizing: border-box; margin:0; padding:0; user-select:none; }
+* { box-sizing: border-box; }
 
 html, body {
   height: 100%;
+  margin: 0;
   font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
   background: radial-gradient(1200px 600px at 15% 10%, #0b0710 0%, var(--bg-2) 40%, var(--bg-1) 100%);
   color: #fff;
@@ -21,7 +21,7 @@ html, body {
 
 .container { position: relative; width: 100%; height: 100%; }
 
-/* canvas */
+/* Fullscreen canvas */
 #spaceCanvas {
   position: absolute;
   inset: 0;
@@ -31,7 +31,7 @@ html, body {
   display: block;
 }
 
-/* planet row (centered bottom) */
+/* Planet boost bottom row */
 .planet-row {
   position: absolute;
   left: 50%;
@@ -47,114 +47,84 @@ html, body {
   pointer-events: none;
 }
 
-/* planet wrapper shows top half only */
 .planet-wrap {
   pointer-events: auto;
   width: clamp(220px, 30vw, 520px);
-  height: calc(clamp(220px, 30vw, 520px) / 2);
+  height: calc(clamp(220px, 30vw, 520px)/2);
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  cursor: pointer;
 }
 
-.planet {
-  width: 100%;
-  transform: translateY(-25%);
-  filter: drop-shadow(0 20px 30px var(--mars-shadow));
-  position: relative;
+.planet { 
+  width: 100%; 
+  transform: translateY(-50%); 
+  filter: drop-shadow(0 20px 30px var(--mars-shadow)); 
+  position: relative; 
 }
 
-/* readable badge sitting on top half */
-.planet-badge {
-  position: absolute;
-  left: 50%;
-  top: 12%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 14px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.22));
-  backdrop-filter: blur(4px);
-  pointer-events: none;
-  width: min(86%, 420px);
-  z-index: 10;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+.spaceship-cta { 
+  width: clamp(140px, 22vw, 260px); 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 8px; 
+  pointer-events: none; 
+  margin-bottom: calc(clamp(220px, 30vw, 520px)/4); 
 }
 
-.badge-404 {
-  font-size: clamp(38px, 8vw, 88px);
-  color: #ffb6a3;
-  font-weight: 800;
-  letter-spacing: 6px;
-  line-height: 0.9;
-  text-shadow: 0 6px 14px rgba(139,27,22,0.35);
+.ship-icon { display:block; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
+.ship-label { font-size:12px; color:#ffd9c9; text-align:center; max-width:16rem; opacity:0.95; background:rgba(0,0,0,0.18); padding:6px 8px; border-radius:8px; }
+
+/* Game UI above planet */
+.game-ui { 
+  position:absolute; 
+  left:50%; 
+  bottom:calc(clamp(220px,30vw,520px)/2 + 10vh); 
+  transform:translateX(-50%); 
+  z-index:7; 
+  text-align:center; 
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12)); 
+  padding:10px 16px; 
+  border-radius:12px; 
+  backdrop-filter:blur(6px); 
+  box-shadow:var(--ui-glow); 
+  min-width:280px; 
+  max-width:92%; 
 }
 
-.badge-tag {
-  font-size: clamp(12px, 1.9vw, 16px);
-  color: #ffd9c9;
-  text-align: center;
-  max-width: 42ch;
-}
-
-/* spaceship CTA */
-.spaceship-cta {
-  position: absolute;
-  bottom: calc(clamp(220px, 30vw, 520px)/2 + 12px);
-  left: 50%;
-  transform: translateX(100%);
-  width: clamp(140px, 22vw, 260px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  pointer-events: none;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-.ship-icon { display: block; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
-.ship-label {
-  font-size: 12px;
-  color: #ffd9c9;
-  text-align: center;
-  max-width: 16rem;
-  opacity: 0.95;
-  background: rgba(0,0,0,0.18);
-  padding: 6px 8px;
-  border-radius: 8px;
-}
-
-/* game UI */
-.game-ui {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 7;
-  text-align: center;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
-  padding: 10px 16px;
-  border-radius: 12px;
-  backdrop-filter: blur(6px);
-  box-shadow: var(--ui-glow);
-  min-width: 280px;
-  max-width: 92%;
-}
-
-.instructions { margin: 0 0 6px 0; font-size: 13px; opacity: 0.95; }
-.scoreboard { display: flex; gap: 12px; justify-content: center; font-weight: 600; font-size: 15px; flex-wrap: wrap; }
+.scoreboard { display:flex; gap:12px; justify-content:center; font-weight:600; font-size:15px; flex-wrap:wrap; }
 .scoreboard span { color: var(--accent); }
-.controls { display: flex; gap: 10px; justify-content: center; margin-top: 8px; }
-.btn { background: var(--btn-bg); border: 1px solid var(--btn-border); color: #fff; padding: 8px 12px; border-radius: 10px; font-weight: 600; cursor: pointer; min-width: 84px; }
 
-.credits { position: absolute; left: 6%; bottom: 2%; z-index: 7; font-size: 12px; color: #d9cfcf; opacity: 0.9; }
+.controls { display:flex; gap:10px; justify-content:center; margin-top:8px; }
+.btn { background:var(--btn-bg); border:1px solid var(--btn-border); color:#fff; padding:8px 12px; border-radius:10px; font-weight:600; cursor:pointer; min-width:84px; }
 
-/* responsive fallback */
+/* 404 badge in top-left with dynamic blinking */
+.badge-404 {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
+  z-index: 10;
+  animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+  0% { opacity: 1; text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent); }
+  50% { opacity: 0.4; text-shadow: 0 0 4px var(--accent), 0 0 8px var(--accent); }
+  100% { opacity: 1; text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent); }
+}
+
+.credits { 
+  position:absolute; left:6%; bottom:2%; z-index:7; 
+  font-size:12px; color:#d9cfcf; opacity:0.9; 
+}
+
 @media (max-height: 520px) {
-  .planet-wrap { height: 160px; }
-  .game-ui { bottom: 26vh; }
+  .planet-wrap { height:160px; }
+  .game-ui { bottom:26vh; }
 }
