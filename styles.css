@@ -1,3 +1,5 @@
+/* styles.css - Mars 404 vibe + controls */
+
 :root{
   --bg-1: #07060a;
   --bg-2: #0e0b11;
@@ -16,115 +18,127 @@ html, body {
   font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
   background: radial-gradient(1200px 600px at 15% 10%, #0b0710 0%, var(--bg-2) 40%, var(--bg-1) 100%);
   color: #fff;
+  -webkit-font-smoothing: antialiased;
   overflow: hidden;
 }
 
 .container { position: relative; width: 100%; height: 100%; }
 
-/* Fullscreen canvas */
+/* header */
+.hero {
+  position: absolute;
+  top: 6%;
+  left: 5%;
+  z-index: 4;
+  text-align: left;
+  pointer-events: none;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(48px, 10vw, 120px);
+  letter-spacing: 6px;
+  color: #ffb6a3;
+  text-shadow: 0 6px 18px rgba(139,27,22,0.45), 0 0 8px rgba(255,110,90,0.08);
+  line-height: 0.9;
+}
+
+.tagline {
+  margin: 8px 0 0 0;
+  font-size: clamp(14px, 2.3vw, 20px);
+  color: #ffd9c9;
+  max-width: 42ch;
+  opacity: 0.95;
+}
+
+/* canvas (space) */
 #spaceCanvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
   display: block;
+  z-index: 1;
 }
 
-/* Planet boost bottom row */
-.planet-row {
+/* Mars graphic */
+.mars-element {
   position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 860px;
-  z-index: 6;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 18px;
+  right: 4%;
+  bottom: 16%;
+  width: clamp(80px, 9vw, 160px);
+  height: auto;
+  z-index: 3;
+  filter: drop-shadow(0 20px 30px var(--mars-shadow));
   pointer-events: none;
 }
 
-.planet-wrap {
-  pointer-events: auto;
-  width: clamp(220px, 30vw, 520px);
-  height: calc(clamp(220px, 30vw, 520px)/2);
-  overflow: hidden;
+/* Game UI */
+.game-ui {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+  padding: 10px 18px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  box-shadow: var(--ui-glow);
+  min-width: 280px;
+  max-width: 92%;
+}
+
+.instructions {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  opacity: 0.95;
+}
+
+.scoreboard {
   display: flex;
+  gap: 14px;
   justify-content: center;
-  align-items: flex-start;
+  font-weight: 600;
+  font-size: 16px;
+  flex-wrap: wrap;
 }
 
-.planet { 
-  width: 100%; 
-  transform: translateY(-50%); 
-  filter: drop-shadow(0 20px 30px var(--mars-shadow)); 
-  position: relative; 
-}
-
-.spaceship-cta { 
-  width: clamp(140px, 22vw, 260px); 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  gap: 8px; 
-  pointer-events: none; 
-  margin-bottom: calc(clamp(220px, 30vw, 520px)/4); 
-}
-
-.ship-icon { display:block; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
-.ship-label { font-size:12px; color:#ffd9c9; text-align:center; max-width:16rem; opacity:0.95; background:rgba(0,0,0,0.18); padding:6px 8px; border-radius:8px; }
-
-/* Game UI above planet */
-.game-ui { 
-  position:absolute; 
-  left:50%; 
-  bottom:calc(clamp(220px,30vw,520px)/2 + 10vh); 
-  transform:translateX(-50%); 
-  z-index:7; 
-  text-align:center; 
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12)); 
-  padding:10px 16px; 
-  border-radius:12px; 
-  backdrop-filter:blur(6px); 
-  box-shadow:var(--ui-glow); 
-  min-width:280px; 
-  max-width:92%; 
-}
-
-.scoreboard { display:flex; gap:12px; justify-content:center; font-weight:600; font-size:15px; flex-wrap:wrap; }
 .scoreboard span { color: var(--accent); }
 
-.controls { display:flex; gap:10px; justify-content:center; margin-top:8px; }
-.btn { background:var(--btn-bg); border:1px solid var(--btn-border); color:#fff; padding:8px 12px; border-radius:10px; font-weight:600; cursor:pointer; min-width:84px; }
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 8px;
+}
 
-/* 404 badge in top-left with dynamic blinking */
-.badge-404 {
+.btn {
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-border);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 86px;
+}
+
+.btn:active { transform: translateY(1px); }
+
+.credits {
   position: absolute;
-  top: 16px;
-  left: 16px;
-  font-size: 36px;
-  font-weight: bold;
-  color: var(--accent);
-  text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
-  z-index: 10;
-  animation: blink 1s infinite alternate;
-}
-
-@keyframes blink {
-  0% { opacity: 1; text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent); }
-  50% { opacity: 0.4; text-shadow: 0 0 4px var(--accent), 0 0 8px var(--accent); }
-  100% { opacity: 1; text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent); }
-}
-
-.credits { 
-  position:absolute; left:6%; bottom:2%; z-index:7; 
-  font-size:12px; color:#d9cfcf; opacity:0.9; 
+  left: 6%;
+  bottom: 4%;
+  z-index: 4;
+  font-size: 12px;
+  color: #d9cfcf;
+  opacity: 0.9;
 }
 
 @media (max-height: 520px) {
-  .planet-wrap { height:160px; }
-  .game-ui { bottom:26vh; }
+  .hero { top: 3%; }
+  .mars-element { bottom: 22%; right: 3%; }
+  .game-ui { bottom: 4%; padding: 8px 12px; }
 }
